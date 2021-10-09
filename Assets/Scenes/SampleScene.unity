@@ -282,6 +282,7 @@ GameObject:
   - component: {fileID: 526250677}
   - component: {fileID: 526250679}
   - component: {fileID: 526250680}
+  - component: {fileID: 526250681}
   m_Layer: 0
   m_Name: Stamper
   m_TagString: Untagged
@@ -342,6 +343,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _initColor: {r: 0, g: 0, b: 0, a: 0}
   _target: {fileID: 1493450577}
+  _footprint: {fileID: 526250681}
 --- !u!114 &526250680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -356,6 +358,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stamper: {fileID: 526250677}
   _height: 0.4
+--- !u!114 &526250681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 526250676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e171348d0dcd0ad48ade23a540681d18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _computeShader: {fileID: 7200000, guid: 023fb208c4949b74daaa5aaf10a939ab, type: 3}
 --- !u!1 &653260035
 GameObject:
   m_ObjectHideFlags: 0

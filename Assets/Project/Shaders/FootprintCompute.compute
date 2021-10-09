@@ -1,0 +1,9 @@
+﻿#pragma kernel Update
+
+RWTexture2D<float4> _Footprint;
+
+[numthreads(8,8,1)]
+void Update(uint3 id : SV_DispatchThreadID)
+{
+    _Footprint[id.xy] = _Footprint[id.xy] * 0.998;
+}

@@ -49,6 +49,7 @@ public class StampDrawer : MonoBehaviour
         private RenderTexture CreateRenderTexture(int width, int height)
         {
             RenderTexture rt = new RenderTexture(width, height, 0, RenderTextureFormat.ARGBHalf);
+            rt.enableRandomWrite = true;
             rt.Create();
             ClearTexture(rt);
 
@@ -79,20 +80,22 @@ public class StampDrawer : MonoBehaviour
 
     [SerializeField] private Color _initColor = Color.clear;
     [SerializeField] private GameObject _target = null;
+    [SerializeField] private Footprint _footprint = null;
 
     private int _defaultStampTextureSize = 1024;
-    private RenderTexture _stampedTexture = null;
+    // private RenderTexture _stampedTexture = null;
     private SwapBuffer _swapBuffer = null;
     private int _mainTexId = 0;
     
     private Mesh _mesh = null;
+    private Renderer _targetRenderer = null;
 
     public void Setup()
     {
         _mainTexId = Shader.PropertyToID("_MainTex");
         
-        Renderer ren = _target.GetComponent<Renderer>();
-        Texture texture = ren.sharedMaterials[0].mainTexture;
+        _targetRenderer = _target.GetComponent<Renderer>();
+        Texture texture = _targetRenderer.sharedMaterials[0].mainTexture;
 
         int width = 0;
         int height = 0;
@@ -108,11 +111,13 @@ public class StampDrawer : MonoBehaviour
             height = texture.height;
         }
 
-        _stampedTexture = new RenderTexture(width, height, 0, RenderTextureFormat.ARGBHalf);
-        _stampedTexture.Create();
-        ren.sharedMaterials[0].mainTexture = _stampedTexture;
+        // _stampedTexture = new RenderTexture(width, height, 0, RenderTextureFormat.ARGBHalf);
+        // _stampedTexture.enableRandomWrite = true;
+        // _stampedTexture.Create();
+        // ren.sharedMaterials[0].mainTexture = _swapBuffer.Current;
 
         _swapBuffer = new SwapBuffer(width, height, _initColor);
+        _targetRenderer.sharedMaterials[0].mainTexture = _swapBuffer.Current;
 
         MeshFilter filter = _target.GetComponent<MeshFilter>();
         _mesh = filter.sharedMesh;
@@ -133,6 +138,8 @@ public class StampDrawer : MonoBehaviour
         
         _swapBuffer.Swap();
 
-        Graphics.CopyTexture(_swapBuffer.Current, _stampedTexture);
+        // Graphics.CopyTexture(_swapBuffer.Current, _stampedTexture);
+        _footprint.SetTexture(_swapBuffer.Current);
+        _targetRenderer.sharedMaterials[0].mainTexture = _swapBuffer.Current;
     }
 }
