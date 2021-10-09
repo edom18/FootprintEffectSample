@@ -23,6 +23,9 @@ public class Stamper : MonoBehaviour
     [SerializeField] private GameObject _target = null;
     [SerializeField] private StampDrawer _stampDrawer = null;
 
+    [Header("==== Debug ====")] [SerializeField]
+    private bool _showGizoms = true;
+
     private Matrix4x4 _tMatrix = Matrix4x4.identity;
     private Matrix4x4 _lightView = Matrix4x4.identity;
     private Matrix4x4 _lightProj = Matrix4x4.identity;
@@ -68,6 +71,8 @@ public class Stamper : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        if (!_showGizoms) return;
+        
         Gizmos.color = Color.cyan;
 
         Vector3 p = transform.position;

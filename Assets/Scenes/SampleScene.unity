@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2138677392}
-  m_IndirectSpecularColor: {r: 0.2850269, g: 0.3713935, b: 0.49601045, a: 1}
+  m_IndirectSpecularColor: {r: 0.2835255, g: 0.36529306, b: 0.46553484, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -315,6 +315,7 @@ MonoBehaviour:
     FixScaleOrtho: 0
   _target: {fileID: 874076328}
   _stampDrawer: {fileID: 526250679}
+  _showGizoms: 1
 --- !u!4 &526250678
 Transform:
   m_ObjectHideFlags: 0
