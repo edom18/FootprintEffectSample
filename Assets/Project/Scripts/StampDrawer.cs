@@ -83,23 +83,28 @@ public class StampDrawer : MonoBehaviour
     [SerializeField] private Footprint _footprint = null;
 
     private int _defaultStampTextureSize = 1024;
-    // private RenderTexture _stampedTexture = null;
     private SwapBuffer _swapBuffer = null;
     private int _mainTexId = 0;
-    
+
     private Mesh _mesh = null;
     private Renderer _targetRenderer = null;
+
+    private void SetTexture(RenderTexture target)
+    {
+        _footprint.SetTexture(target);
+        _targetRenderer.sharedMaterials[0].mainTexture = target;
+    }
 
     public void Setup()
     {
         _mainTexId = Shader.PropertyToID("_MainTex");
-        
+
         _targetRenderer = _target.GetComponent<Renderer>();
         Texture texture = _targetRenderer.sharedMaterials[0].mainTexture;
 
         int width = 0;
         int height = 0;
-        
+
         if (texture == null)
         {
             width = _defaultStampTextureSize;
@@ -110,11 +115,6 @@ public class StampDrawer : MonoBehaviour
             width = texture.width;
             height = texture.height;
         }
-
-        // _stampedTexture = new RenderTexture(width, height, 0, RenderTextureFormat.ARGBHalf);
-        // _stampedTexture.enableRandomWrite = true;
-        // _stampedTexture.Create();
-        // ren.sharedMaterials[0].mainTexture = _swapBuffer.Current;
 
         _swapBuffer = new SwapBuffer(width, height, _initColor);
         _targetRenderer.sharedMaterials[0].mainTexture = _swapBuffer.Current;
@@ -135,11 +135,9 @@ public class StampDrawer : MonoBehaviour
         Graphics.DrawMeshNow(_mesh, _target.transform.localToWorldMatrix);
 
         RenderTexture.active = temp;
-        
+
         _swapBuffer.Swap();
 
-        // Graphics.CopyTexture(_swapBuffer.Current, _stampedTexture);
-        _footprint.SetTexture(_swapBuffer.Current);
-        _targetRenderer.sharedMaterials[0].mainTexture = _swapBuffer.Current;
+        SetTexture(_swapBuffer.Current);
     }
 }
