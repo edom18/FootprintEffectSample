@@ -64,6 +64,7 @@
                 float3 n = normalize(cross(dv, du));
 
                 float diff = dot(n, _WorldSpaceLightPos0.xyz);
+                diff = max(0.3, diff);
 
                 return float4(diff.xxx, 1.0);
             }
