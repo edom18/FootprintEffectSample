@@ -18,6 +18,11 @@ public class Footprint : MonoBehaviour
         RuntimeShader.Dispatch(_kernelID, _target.width / 8, _target.height / 8, 1);
     }
 
+    public void SetBaseTexture(Texture baseTex)
+    {
+        RuntimeShader.SetTexture(_kernelID, "_BaseTex", baseTex);
+    }
+
     public void SetTexture(RenderTexture target)
     {
         _kernelID = RuntimeShader.FindKernel("Update");

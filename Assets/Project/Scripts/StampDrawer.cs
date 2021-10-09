@@ -102,6 +102,8 @@ public class StampDrawer : MonoBehaviour
         _targetRenderer = _target.GetComponent<Renderer>();
         Texture texture = _targetRenderer.sharedMaterials[0].mainTexture;
 
+        _footprint.SetBaseTexture(texture);
+
         int width = 0;
         int height = 0;
 
