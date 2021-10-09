@@ -1,9 +1,10 @@
 ﻿#pragma kernel Update
 
 RWTexture2D<float4> _Footprint;
+Texture2D<float4> _BaseTex;
 
 [numthreads(8,8,1)]
 void Update(uint3 id : SV_DispatchThreadID)
 {
-    _Footprint[id.xy] = _Footprint[id.xy] * 0.998;
+    _Footprint[id.xy] = lerp(_Footprint[id.xy], 1.0 - _BaseTex[id.xy], 0.002);
 }

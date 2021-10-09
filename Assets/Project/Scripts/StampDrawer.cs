@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class StampDrawer : MonoBehaviour
 {
@@ -119,6 +117,7 @@ public class StampDrawer : MonoBehaviour
         }
 
         _swapBuffer = new SwapBuffer(width, height, _initColor);
+        Graphics.Blit(texture, _swapBuffer.Current);
         _targetRenderer.sharedMaterials[0].mainTexture = _swapBuffer.Current;
 
         MeshFilter filter = _target.GetComponent<MeshFilter>();
