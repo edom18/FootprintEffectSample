@@ -100,8 +100,6 @@ public class StampDrawer : MonoBehaviour
         _targetRenderer = _target.GetComponent<Renderer>();
         Texture texture = _targetRenderer.sharedMaterials[0].mainTexture;
 
-        _footprint.SetBaseTexture(texture);
-
         int width = 0;
         int height = 0;
 
@@ -118,7 +116,8 @@ public class StampDrawer : MonoBehaviour
 
         _swapBuffer = new SwapBuffer(width, height, _initColor);
         Graphics.Blit(texture, _swapBuffer.Current);
-        _targetRenderer.sharedMaterials[0].mainTexture = _swapBuffer.Current;
+        SetTexture(_swapBuffer.Current);
+        _footprint.SetBaseTexture(texture);
 
         MeshFilter filter = _target.GetComponent<MeshFilter>();
         _mesh = filter.sharedMesh;
