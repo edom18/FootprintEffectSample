@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Stamper : MonoBehaviour
 {
@@ -61,11 +58,6 @@ public class Stamper : MonoBehaviour
     {
         UpdateMatrix();
         UpdateParameters();
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            _stampDrawer.Stamp(_stampMaterial);
-        }
     }
 
     private void OnDestroy()
@@ -157,5 +149,10 @@ public class Stamper : MonoBehaviour
     {
         return Matrix4x4.Ortho(_orthoMatrixParam.Left, _orthoMatrixParam.Right, _orthoMatrixParam.Bottom, _orthoMatrixParam.Top,
             _orthoMatrixParam.Near, _orthoMatrixParam.Far);
+    }
+
+    public void Stamp()
+    {
+        _stampDrawer.Stamp(_stampMaterial);
     }
 }
