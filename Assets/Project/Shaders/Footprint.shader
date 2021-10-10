@@ -4,6 +4,7 @@
     {
         _MainTex ("Texture", 2D) = "white" {}
         _Scale ("Scale", Float) = 0.1
+        _LightDir ("Light Direction", Vector) = (1, 1, 0, 0)
     }
     SubShader
     {
@@ -36,6 +37,7 @@
             float _Scale;
             float4 _MainTex_ST;
             float4 _MainTex_TexelSize;
+            float4 _LightDir;
 
             v2f vert (appdata v)
             {
@@ -63,7 +65,7 @@
 
                 float3 n = normalize(cross(dv, du));
 
-                float diff = dot(n, _WorldSpaceLightPos0.xyz);
+                float diff = dot(n, normalize(_LightDir.xyz));
                 diff = max(0.3, diff);
 
                 return float4(diff.xxx, 1.0);
