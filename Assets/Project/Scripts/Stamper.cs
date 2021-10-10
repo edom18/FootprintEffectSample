@@ -44,13 +44,7 @@ public class Stamper : MonoBehaviour
         _stampMaterial = new Material(Shader.Find("SimpleStamp/StampDrawer"));
         _stampMaterial.EnableKeyword("ORTHOGONAL");
 
-        Renderer ren = _target.GetComponent<Renderer>();
-        _targetMaterial = ren.material;
-        ren.materials = new[]
-        {
-            _targetMaterial,
-            _previewMaterial,
-        };
+        SetTarget(_target);
 
         CreateMatrix();
         
@@ -159,5 +153,18 @@ public class Stamper : MonoBehaviour
     public void Stamp()
     {
         _stampDrawer.Stamp(_stampMaterial);
+    }
+
+    public void SetTarget(GameObject target)
+    {
+        _target = target;
+        
+        Renderer ren = target.GetComponent<Renderer>();
+        _targetMaterial = ren.material;
+        ren.materials = new[]
+        {
+            _targetMaterial,
+            _previewMaterial,
+        };
     }
 }
