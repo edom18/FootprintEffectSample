@@ -36,6 +36,12 @@ public class Stamper : MonoBehaviour
     private Material _previewMaterial = null;
     private Material _stampMaterial = null;
 
+    public Texture2D StampTexture
+    {
+        get => _stampTexture;
+        set => _stampTexture = value;
+    }
+
     private void Awake()
     {
         _previewMaterial = new Material(Shader.Find("SimpleStamp/StampProjection"));
