@@ -26,12 +26,12 @@ public class StampController : MonoBehaviour
 
     private void OnGUI()
     {
-        if (GUI.Button(new Rect(10, 10, 130, 30), "足跡"))
+        if (GUI.Button(new Rect(10, 10, 250, 50), "足跡"))
         {
             _stamper.Stamp();
         }
 
-        if (GUI.Button(new Rect(150, 10, 130, 30), "変更"))
+        if (GUI.Button(new Rect(270, 10, 250, 50), "変更"))
         {
             Change();
         }
