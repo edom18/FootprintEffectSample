@@ -31,6 +31,7 @@
             {
                 float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
+                float3 worldPos : TEXCOORD1;
             };
 
             sampler2D _MainTex;
@@ -45,6 +46,7 @@
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 float4 mask = tex2Dlod(_MainTex, float4(o.uv, 0, 0));
                 v.vertex.y -= mask.r * mask.a * _Scale;
+                o.worldPos = mul(unity_ObjectToWorld, float4(v.vertex.xyz, 1.0));
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 return o;
             }
@@ -67,6 +69,12 @@
 
                 float diff = dot(n, normalize(_LightDir.xyz));
                 diff = max(0.3, diff);
+
+                float3 cameraDir = normalize(_WorldSpaceCameraPos - i.worldPos);
+                float3 halfVec = normalize(_LightDir + cameraDir);
+                float ld = dot(n, halfVec);
+                ld = pow(ld, 10.0);
+                diff += ld;
 
                 return float4(diff.xxx, 1.0);
             }
