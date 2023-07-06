@@ -61,7 +61,7 @@
                 float texZ = tex2D(_MainTex, i.uv.xy + shiftZ).r * 2.0 - 1.0;
                 float texz = tex2D(_MainTex, i.uv.xy - shiftZ).r * 2.0 - 1.0;
 
-                // 偏微分により説ベクトルを求める
+                // 偏微分により接ベクトルを求める
                 float3 du = float3(1.0, (texX - texx), 0.0);
                 float3 dv = float3(0.0, (texZ - texz), 1.0);
 
